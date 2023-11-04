@@ -1,0 +1,52 @@
+<section data-component="DatePicker">
+  <input type="checkbox" data-component="Switch" data-left="Calendar" data-right="I'm flexible" />
+  <section data-component="Calendar" />
+  <section data-component="Calendar" data-offset="1" />
+</section>
+
+
+
+<script>
+
+  class DatePicker {
+    switches = {};
+    calendars = [];
+    constructor(node) {
+      node.querySelectorAll("[data-component='Switch']").forEach(switchNode => {
+        const sw = new Switch(switchNode);
+        this.switches[sw.getIdentifier()] = sw;
+      })
+
+      node.querySelectorAll("[data-component='Calendar']").forEach((calNode, index) => {
+        const cal = new Calendar(calNode);
+        this.calendars.push(cal)
+      })
+    }
+  }
+
+  class Calendar {
+    constructor(node) { }
+  }
+
+  class Switch {
+    constructor(node) { }
+  }
+
+  document.querySelectorAll("[data-component='DatePicker']").forEach(node => {
+    new DatePicker(node);
+  })
+
+</script>
+
+<style>
+  .switch {}
+  .switch .option {}
+  .switch .option.selected {}
+
+  .calendar {}
+  .calendar .date {}
+  .calendar .date.unavailable {}
+  .calendar .date.selected {}
+  .calendar .date.range {}
+
+</style>

@@ -1,0 +1,150 @@
+<!-- 
+  Interview Question: design up a card, looks like an IG bio
+  
+  label the components
+draw a bunch of boxes:
+
+card
+background
+potrait
+name
+bio
+about
+actions
+statistics (followers)
+follow button
+
+
+- take the boxes you've drawn and...
+- write the HTML heirarchy
+- write the CSS
+- use placeholder images
+- use placekitten.com/width/height
+
+- links go to Google.com
+-->
+
+<!-- DO THIS SEMANTIC HTML Heirarchy first -->
+<section class="card">
+  <div class="background">
+    <article class="about">
+      <img src="placekitten.com/60/60" alt="background">
+      <h3>Ann Lovefully</h3>
+      <h4>Designer, cat lover, bookworm, applie pie fanatic and nature enthusiast :)</h4>
+      <div class="actions">
+        <a href="https://maps.google.com" class="location">Hungary</a>
+        <a href="mailt:ann@hi.com" class="email">Send E-mail</a>
+      </div>
+    </article>
+    <ul class="statistics">
+      <li><span class="value">48,392</span> Followers</li>
+      <li><span class="value">3,567</span> Following</li>
+    </ul>
+    <div class="follow">Follow</div>
+  </div>
+</section>
+
+
+<!-- PUT ALL EMPTY CSS SELECTORS BASED ON heirarchy here -->
+<style>
+  * {
+    /*    just globally hide padding and margin for interview */
+    padding: 0;
+    margin: 0
+  }
+
+  body {
+    font-family: sans-serif;
+    padding: 10px;
+  }
+
+  .card {
+    width: 300px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .card .background {
+    position: relative;
+  }
+
+  /*The :before is not a selector but a pseudo-element selector. It's used to select and style a pseudo-element that is created and inserted before the content of an element.  */
+  .card .background:before {
+    position: absolute;
+    content: '';
+    /*    so it goes behind everything else: */
+    z-index: -1;
+    width: 100%;
+    height: 150px;
+    background-image: url(http://placekitten.com/g/300/300);
+    background-size: cover;
+  }
+
+  /* .card .background:before is a selector that targets the ::before pseudo-element of the element matched by the .card .background selector. It's used to style and add content before the "background" element.
+
+You can use the ::before pseudo-element to insert content, such as text or icons, before the content of the selected element. For example:
+*/
+  .card .background::before {
+    /*   content: "***" */
+  }
+
+  .card .about {}
+
+  .card .about img {
+    border-radius: 50%;
+    position: absolute;
+    top: 50px;
+  }
+
+  .card .about h3 {}
+
+  .card .about h4 {}
+
+  .card .about .actions {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .card .about .actions .location {}
+
+  .card .about .actions .email {}
+
+  .card .statistics {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .card .statistics li {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* The item can grow and shrink with available space. */
+    flex: 1 1 auto;
+    /*     justify-content: flex-end; */
+    font-size: 0.8rem;
+    padding: 10px 0;
+    border: 1px solid lightgrey;
+    border-bottom: 0;
+    border-right: 0;
+    background-color: #eee;
+  }
+
+  .statistics li:first-child {
+    border-left: 0;
+  }
+
+  .statistics li .value {
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .card .follow {
+    border: 0;
+    width: 100%;
+    background: green;
+    height: 40px;
+    color: white;
+    cursor: pointer;
+  }
+</style>

@@ -1,0 +1,112 @@
+<button data-component="LoaderButton" data-icon="+" data-pending-icon="w">
+  New Integration
+</button>
+
+<template data-template-for="LoaderButton" data-template-id="withIcon">
+  <div class="pairing">
+    <div class="icon"></div>
+    <div class="label"></div>
+  </div>
+</template>
+
+
+<script>
+  class LoaderButton {
+    root = null;
+    templates = {};
+    pending = false;
+
+    constructor(node) {
+      document.querySelectorAll("template[data-template-for='LoaderButton']").forEach(template => {
+        this.templates[template.dataset.templateId] = template;
+      })
+      this.root = node;
+      const label = document.createTextNode(node.innerText); // grab "New Integration text" and make it a text node
+      const template = document.querySelector("[data-template-for='LoaderButton']")
+      this.templates.normal = template.content.cloneNode(true);
+      this.templates.normal.querySelector('.icon').appendChild(document.createTextNode(node.dataset.icon)) // the "+"
+      this.templates.normal.querySelector('.label').appendChild(label.cloneNode(true)); // put "New Integration" text node in label div
+
+      this.templates.pending = template.content.cloneNode(true);
+      this.templates.pending.querySelector('.icon').appendChild(document.createTextNode(node.dataset.pendingIcon)); // the "w"
+      // this.templates.pending.querySelector('.label').appendChild(label.cloneNode(true));
+
+      this.render();
+    }
+
+    setPending(value) {
+      if (this.pending === value) return;
+      this.pending = value;
+      this.render();
+    }
+
+    removeListeners() {
+      this.root.removeEventListener("click", this.handleClick);
+    }
+
+    addListeners() {
+      this.root.addEventListener("click", this.handleClick);
+    }
+
+    render() {
+      console.log('this.pending', this.pending)
+      this.removeListeners();
+      this.root.innerHTML = "";
+
+      if (this.pending) {
+        this.root.appendChild(this.templates.pending.cloneNode(true)); // append pending template with the pending icon
+      } else {
+        this.root.appendChild(this.templates.normal.cloneNode(true));
+      }
+
+      this.addListeners();
+    }
+
+    handleClick = () => {
+      if (this.pending) return; // don't need to re-render if alaready pending
+      this.pending = true;
+      this.render();
+    }
+  }
+
+
+  document.querySelectorAll("[data-component='LoaderButton']").forEach((node) => {
+    const loaderButton = new LoaderButton(node);
+
+    // onclick, set pending to false after some time
+    // requirement was: it needed to be controlled from the outside
+    node.addEventListener('click', () => {
+      setTimeout(() => {
+        loaderButton.setPending(false);
+      }, 3000)
+    })
+  })
+</script>
+
+
+<style>
+  [data-component="LoaderButton"] {
+    margin: 0;
+    padding: 0dvb 6px 8px;
+    border: 0;
+    background: #23b34c;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  [data-component="LoaderButton"] .pairing {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  [data-component="LoaderButton"] .icon {
+    width: 20px;
+  }
+
+  [data-component="LoaderButton"] .label {
+    flex: 1 0 auto;
+    margin-left: 6px;
+  }
+</style>

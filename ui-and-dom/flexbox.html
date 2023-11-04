@@ -1,0 +1,72 @@
+
+
+
+<!-- 
+1) The Flex container
+2) The flex items
+
+ - Majority of layout work done in flex container
+ - items listen to what the flex container says
+ - (You can also do overrides on the items)
+
+ - display:flex creates a flex container
+ - set the main axis with flex-direction
+ - control wrapping rules with flex-wrap
+ - set default MAIN and CROSS axis alignment
+ - justify-content = main axis
+ - align-items = cross axis
+
+
+
+ justify-content:
+ - alignment is along the main axis
+ - what happens with the leftover free space
+ - most common are flex-start and flex-end and center
+ - there's also space-between, space-around and space-evenly
+
+
+ FLEX ITEMS:
+
+ order:
+ - change the order that the flex items render
+
+ flex: <grow>, -shrink>, <basis> 
+  The flex-grow property determines how much a flex item should grow relative to other flex items when there's available space within the flex container.
+ 
+ align-self: <position>
+  - change the cross-axis alignment for ONE OF THE items
+  - flex-start, flex-end
+-->
+
+
+
+
+<section class="row">
+  <div class="item">...</div>
+  <div class="item">...</div>
+  <div class="item">...</div>
+</section>
+
+
+<style>
+  .row {
+  
+    display: flex; 
+    /* row, column, row-reverse, column-reverse */
+    flex-direction: row; 
+    /* justify-content: inside the row, how things are justified...
+
+     */
+    justify-content: flex-end;
+    /* inside the columns, how things are positioned/justified: */
+    align-items: center;  
+    /* "nowrap" to force a single row or column. "wrap" to allow warapping to next row or column. "wrap-reverse" to allow wrapping to the previous row or column */
+    /* flex-wrap: nowrap; */
+
+  }
+
+  .item {
+     /* The item can grow and shrink with available space. */
+     flex: 1 1 auto
+  }
+</style>

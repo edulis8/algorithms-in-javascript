@@ -1,0 +1,107 @@
+<!-- BeeCat Semantic HTML -->
+
+<!-- data component with initial state -->
+<button data-component="BeeCat" data-start="0"></button>
+
+
+
+<!-- templates, which are like code snippets -->
+<template data-template-for="BeeCat" data-template-id="number">
+  <span></span>
+</template>
+
+<template data-template-for="BeeCat" data-template-id="bee">
+  <span>🐝</span>
+</template>
+
+<template data-template-for="BeeCat" data-template-id="cat">
+  <span>🐱</span>
+</template>
+
+
+<script>
+  class BeeCat {
+    // state variable
+    count = 0;
+    // root
+    root = null;
+    // template object
+    templates = {};
+    // constructor (node)
+    constructor(node) {
+      // initialize variables by grabbing from HTML dataset
+      this.count = parseInt(node.dataset.start, 10);
+      // put templates into object
+      document.querySelectorAll("template[data-template-for='BeeCat']").forEach(template => {
+        this.templates[template.dataset.templateId] = template;
+      })
+      // set root to node
+      this.root = node;
+      // render
+      this.render();
+    }
+
+    render() {
+      // remove listeners at the start
+      this.removeListeners();
+      // clear root of inner html
+      this.root.innerHTML = "";
+      // read from state
+      const bee = this.count > 0 && this.count % 5 === 0;
+      const cat = this.count > 0 && this.count % 7 === 0;
+      // query / modify / create DOM objects, making use of templates
+      const num = this.templates.number.content.cloneNode(true);
+      console.log('num, what is this, blank span?', num)
+      // createTextNode if just text
+      num.appendChild(document.createTextNode(this.count));
+
+      // add to the DOM with appendChild
+      if (bee) this.root.appendChild(this.templates.bee.content.cloneNode(true));
+      if (cat) this.root.appendChild(this.templates.cat.content.cloneNode(true));
+      if (!bee && !cat) this.root.appendChild(num);
+      this.addListeners();
+    }
+
+    renderWithoutTemplate() {
+      this.removeListeners();
+      this.root.innerHTML = '';
+      const bee = this.count > 0 && this.count % 5 === 0;
+      const cat = this.count > 0 && this.count % 7 === 0;
+      let textDisplay = '';
+      textDisplay += bee ? '🐝' : '';
+      textDisplay += bee ? '🐱' : '';
+      textDisplay += (!bee && !cat) ? this.count : '';
+
+      this.root.appendChild(document.createTextNode(textDisplay));
+      // add listeners at the end
+      this.addListeners();
+    }
+
+    removeListeners() {
+      this.root.removeEventListener("click", this.handleClick);
+    }
+
+    addListeners() {
+      this.root.addEventListener("click", this.handleClick);
+    }
+
+    // use arrow function instead of .bind(this) so callback knows what this is
+    handleClick = () => {
+      // do something
+      this.count++;
+      // call render
+      this.render();
+    }
+  }
+
+
+  // Initializer, initialize your stateful component(s)
+  // Know this, save time
+  // query select the data component
+  // initialize the class
+  document.querySelectorAll("[data-component='BeeCat']").forEach((node) => {
+    new BeeCat(node);
+  })
+
+  
+</script>
