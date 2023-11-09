@@ -42,13 +42,12 @@ const BinaryTreeNode = class {
  * @return {bool}
  */
 function is_bst(root) {
-  // be careful, uyou can't just check the direct children of a BST to see if they meet the BST property -- further down children could have a value 
+  // be careful, you can't just check the direct children of a BST to see if they meet the BST property -- further down children could have a value 
   // greater than the root node, for example
 
-  // an in-order traversal of a BST produces a SORTED ARRAy
+  // KEY TO REMEMBER: an in-order traversal of a BST produces a SORTED ARRAY.
 
   // in-order traversal:
-
   let prev = Number.NEGATIVE_INFINITY;
   let globalResult = true;
   dfs(root);
@@ -59,15 +58,12 @@ function is_bst(root) {
     if (globalResult === false) return; // short circuit
     if (!node) return; // base case
     dfs(node.left)
-
     // In-Order processing. Push to array if creating a sorted array here. However for this solution we don't need the whole array. IF any prev is greater than curr, 
-    // we have a problem. We do need to keep the prev variable global, however - just like the result array would be
-
+    // we have a problem. We do need to keep the prev variable global, however - just like the result array would be.
     if (node.value < prev) {
       globalResult = false;
     }
     prev = node.value;
-
     dfs(node.right)
   }
 }

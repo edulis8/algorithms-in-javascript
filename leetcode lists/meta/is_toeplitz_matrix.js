@@ -1,13 +1,18 @@
 /**
+ * Given an m x n matrix, return true if the matrix is Toeplitz. Otherwise, return false.
+
+A matrix is Toeplitz if every diagonal from top-left to bottom-right has the same elements
+
+
  * @param {number[][]} matrix
  * @return {boolean}
+ * 
+ * // TIME O(mxn in matrix). Linear for grid is like that
+// // SPACE O(1)
  */
 var isToeplitzMatrix = function(matrix) {
   for (let row = 0; row < matrix.length - 1; row++) {
       for (let col = 0; col < matrix[0].length - 1; col++) {
-          
-          
-
           if (matrix[row][col] !== matrix[row + 1][col + 1]) {
               return false;
           }

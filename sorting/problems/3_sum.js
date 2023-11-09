@@ -15,6 +15,7 @@
 // output:
 // ["-2,-2,4", "-3,-1,4"]
 
+// BEST SOLUTION IS QUADRATIC
 function implementation(arr) {
   console.log('arr', arr)
   // Brute force would be three loops, but would be cubic (n^3), we can do better. (You'd try adding all the numbers together.)
@@ -93,9 +94,10 @@ function threeSum(nums) {
   for (let i = 0; i < nums.length; i++) {
     let numHashMap = new Map();
 
-    let target = 0 - nums[i]; // target = -nums[i]
+    let target = -nums[i]; // target = -nums[i]
 
     // iterate forward
+    // nums[i] + nums[j] - nums[i] - num[j] = 0
     for (let j = i + 1; j < nums.length; j++) {
 
       // if map has our searchedForElement, create triplet
@@ -115,3 +117,66 @@ function threeSum(nums) {
 
   return result;
 }
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ * 
+ * returns as array of arrays.
+ * 
+ * Approach 3: "No-Sort"
+What if you cannot modify the input array, and you want to avoid copying it due to memory constraints?
+
+We can adapt the hashset approach above to work for an unsorted array. 
+We can put a combination of three values into a hashset to avoid duplicates. 
+Values in a combination should be ordered (e.g. ascending). Otherwise, we can have results with the same values in the different positions.
+
+Algorithm
+
+The algorithm is similar to the hashset approach above. We just need to add few optimizations so that it works efficiently for repeated values:
+
+Use another hashset dups to skip duplicates in the outer loop.
+Without this optimization, the submission will time out for the test case with 3,000 zeroes. This case is handled naturally when the array is sorted.
+Instead of re-populating a hashset every time in the inner loop, we can use a hashmap and populate it once.
+ Values in the hashmap will indicate whether we have encountered that element in the current iteration. 
+ When we process nums[j] in the inner loop, we set its hashmap value to i. This indicates that we can now use nums[j] as a complement for nums[i].
+This is more like a trick to compensate for container overheads. The effect varies by language, e.g. for C++ it cuts the runtime in half. Without this trick the submission may time out.
+ */
+function threeSum(nums) {
+  const res = new Set(); // result set, doesn't store repeats
+  const dups = new Set(); // skip duplicates in outer loop
+  const seen = new Map(); // {complement => i}
+
+  for (let i = 0; i < nums.length; i++) {
+      if (!dups.has(nums[i])) {
+          for (let j = i + 1; j < nums.length; j++) {
+              const complement = -nums[i] - nums[j]; // complement is what will reduce other two nums to 0
+              if (seen.has(complement) && seen.get(complement) === i) { // i here indicates that we can now use nums[j] as a complement for nums[i].
+                  const triplet = [nums[i], nums[j], complement];
+                  triplet.sort((a, b) => a - b); // sort and stringify to avoid repeats
+                  res.add(JSON.stringify(triplet));
+              }
+              seen.set(nums[j], i); // When we process nums[j] in the inner loop, we set its hashmap value to i
+          }
+          dups.add(nums[i]);
+      }
+  }
+
+  return Array.from(res).map((triplet) => JSON.parse(triplet));
+}
+
+/*
+Complexity Analysis
+
+Time Complexity: O(n2)
+
+ ). We have outer and inner loops, each going through nnn elements.
+
+While the asymptotic complexity is the same, this algorithm is noticeably slower than the previous approach. Lookups in a hashset, though requiring a constant time, are expensive compared to the direct memory access.
+
+Space Complexity: O(n) for the hashset/hashmap.
+
+For the purpose of complexity analysis, we ignore the memory required for the output. However, in this approach we also store output in the hashset for deduplication. In the worst case, there could be O(n2)\mathcal{O}(n^2)O(n 
+2
+ ) triplets in the output, like for this example: [-k, -k + 1, ..., -1, 0, 1, ... k - 1, k]. Adding a new number to this sequence will produce n / 3 new triplets.
+*/

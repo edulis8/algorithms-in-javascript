@@ -3,7 +3,8 @@
 
 // Do rearrange the balls in place. A solution that simply counts colors and overwrites the array is not the one we are looking for.
 
-// This is an important problem in search algorithms theory proposed by Dutch computer scientist Edsger Dijkstra. Dutch national flag has three colors (albeit different from ones used in this problem).
+// This is an important problem in search algorithms theory proposed by Dutch computer scientist Edsger Dijkstra. 
+// Dutch national flag has three colors (albeit different from ones used in this problem).
 
 // Example
 // {
@@ -29,6 +30,7 @@
 function dutch_flag_sort(balls) {
   // all the red balls go first, then green and then blue ones.
   // R,G,B
+  // pivots:
   let rPointer = 0;
   let gPointer = 0;
   for(let i = 0; i < balls.length; i++) {
@@ -64,3 +66,21 @@ let result = dutch_flag_sort(input.balls, input.target);
 console.log('result:', result)
 
 console.error('\n******************** ************\n')
+
+
+//LOMUTO's PARTIONING
+//  we're moving the smaller numbers to the left side of the pivot
+let smallerPointer = start; // the Pivot
+
+// biggerPointer starts one to the right of smaller
+for (let biggerPointer = start + 1; biggerPointer <= end; biggerPointer++) {
+  // if bigger pointer hits a number that is less than the pivot
+  if (arr[biggerPointer] < arr[start]) {
+    smallerPointer++; // we move smaller pointer forward
+    // swap(arr[biggerPointer], arr[smallerPointer])
+    let temp = arr[biggerPointer]; // swap smaller number with bigger number (we're moving the smaller numbers to the left side of the subarray)
+    arr[biggerPointer] = arr[smallerPointer];
+    arr[smallerPointer] = temp;
+  }
+}
+

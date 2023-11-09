@@ -30,7 +30,6 @@ function implementation(nums, target) {
       return [lookup[searchedForElement], j]
     }
   }
-
   return [-1, -1];
 }
 

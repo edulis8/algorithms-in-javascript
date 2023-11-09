@@ -62,6 +62,7 @@ function bfs_traversal(n, edges) {
     }
 
     let visited = new Array(n).fill(false);
+    // outer loop used to hit unconnected parts of the graph
     for (let i = 0; i < n; i++) {
         if (!visited[i]) {
             bfs(i);
@@ -76,7 +77,7 @@ function bfs_traversal(n, edges) {
         visited[node] = true;
         while (queue.length) {
             let current = queue.shift();
-            result.push(current);
+            result.push(current); // processing step
             let neighbors = adjList[current];
             for (let neighbor of neighbors) {
                 if (!visited[neighbor]) {

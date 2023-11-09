@@ -1,4 +1,62 @@
-  // setup two pointers and current number
+/*
+
+408. Valid Word Abbreviation
+Easy
+621
+2K
+company
+Facebook
+Datadog
+company
+Google
+
+
+
+A string can be abbreviated by replacing any number of non-adjacent, non-empty substrings with their lengths. The lengths should not have leading zeros.
+
+For example, a string such as "substitution" could be abbreviated as (but not limited to):
+
+"s10n" ("s ubstitutio n")
+"sub4u4" ("sub stit u tion")
+"12" ("substitution")
+"su3i1u2on" ("su bst i t u ti on")
+"substitution" (no substrings replaced)
+The following are not valid abbreviations:
+
+"s55n" ("s ubsti tutio n", the replaced substrings are adjacent)
+"s010n" (has leading zeros)
+"s0ubstitution" (replaces an empty substring)
+Given a string word and an abbreviation abbr, return whether the string matches the given abbreviation.
+
+A substring is a contiguous non-empty sequence of characters within a string.
+
+ 
+
+Example 1:
+
+Input: word = "internationalization", abbr = "i12iz4n"
+Output: true
+Explanation: The word "internationalization" can be abbreviated as "i12iz4n" ("i nternational iz atio n").
+Example 2:
+
+Input: word = "apple", abbr = "a2e"
+Output: false
+Explanation: The word "apple" cannot be abbreviated as "a2e".
+ 
+
+Constraints:
+
+1 <= word.length <= 20
+word consists of only lowercase English letters.
+1 <= abbr.length <= 10
+abbr consists of lowercase English letters and digits.
+All the integers in abbr will fit in a 32-bit integer.
+
+*/
+
+
+
+// setup two pointers and current number
   // loop while the pointers are within the string bounds
       // if the abbr char is a number
           // add the number to the previous number times 10
@@ -30,7 +88,7 @@ var validWordAbbreviation = function(word, abbr) {
       let curr = abbr[ap];
       if (!isNaN(parseInt(curr))) {
           // digit found
-          if (curr == 0) return false; // no leading 0s
+          if (curr == '0') return false; // no leading 0s
           // skip ahead that many indices in word, (below we'll make sure that many values even exist, if not return false)
           // skip ahead past number's digit length in abbr
           // wp increased
@@ -58,6 +116,7 @@ var validWordAbbreviation = function(word, abbr) {
 
   function zoom(string, p) {
     let low = p;
+
     while (p < string.length && !isNaN(parseInt(string[p]))) {
         p++;
     }
@@ -114,3 +173,61 @@ var validWordAbbreviation = function(word, abbr) {
 
 
 
+var validWordAbbreviation = function(word, abbr) {
+    // Check if the abbreviation is longer than the word, which is invalid.
+    if (abbr.length > word.length) return false;
+  
+    let ap = 0; // Initialize abbreviation pointer.
+    let wp = 0; // Initialize word pointer.
+  
+    // Iterate through the abbreviation.
+    while (ap < abbr.length) {
+      let curr = abbr[ap]; // Get the current character in the abbreviation.
+      
+      // If the current character is a digit (number), handle abbreviations.
+      if (!isNaN(parseInt(curr))) {
+        // Check for leading zeros in the abbreviation.
+        if (curr === '0') return false;
+  
+        // Extract and calculate the length of the number in the abbreviation.
+        let [zoomWord, zoomAbbr] = zoom(abbr, ap);
+  
+        // Move the word and abbreviation pointers ahead by the calculated length.
+        wp += zoomWord;
+        ap += zoomAbbr;
+      } else {
+        // If the current character is not a digit, compare it with the word.
+        // Ensure that both pointers are within their respective string lengths.
+        if (ap >= abbr.length || wp >= word.length || word[wp] != abbr[ap]) {
+          return false;
+        }
+        // Move both pointers forward by one character.
+        ap++;
+        wp++;
+      }
+    }
+  
+    // After processing the entire abbreviation, check if the word pointer reached the end.
+    // If not, the abbreviation doesn't match the word.
+    if (wp != word.length) {
+      return false;
+    }
+    
+    // If all checks passed, the abbreviation matches the word.
+    return true;
+  
+    function zoom(string, p) {
+      let low = p;
+  
+      // Find the end of the number in the abbreviation.
+      while (p < string.length && !isNaN(parseInt(string[p])) {
+        p++;
+      }
+  
+      // Extract the number and its length in the abbreviation.
+      const parsedNumber = parseInt(string.substring(low, p));
+      const lengthOfNumber = p - low;
+      
+      return [parsedNumber, lengthOfNumber];
+    }
+  };

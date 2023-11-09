@@ -92,7 +92,7 @@ e) FIND KTH LARGEST / KTH SMALLEST / MEDIAN - presorting and index lookup. For m
 
 
 PATTERNS OF PRESORTING
-- sorting + binary search
+- sorting + binary search* (see below for definition of binary search)
 - sorting + one pass
 - sorting + two pointer pass
 
@@ -309,3 +309,23 @@ function get_permutations_mutable_with_swapping(arr) {
 
 
 // GENERAL 
+
+// BINARY SEARCH
+// A binary search is a widely used searching algorithm that efficiently locates a specific value within a sorted collection, typically an array. The algorithm divides the collection into two halves and determines if the value you are searching for lies in the left or right half. If the value is not in the current half, the algorithm further divides that half and repeats the process until the value is found or it's clear that the value is not present in the collection.
+
+// Here's a high-level overview of how a binary search works:
+
+// Start with a sorted collection (e.g., an array).
+
+// Define two pointers, one for the left end (usually called "left") and one for the right end (usually called "right") of the collection.
+
+// Calculate the middle index of the current collection, which is often denoted as "mid."
+
+// Compare the middle element (arr[mid]) with the target value you're searching for.
+
+// If the middle element is equal to the target, you've found the value, and you're done.
+// If the middle element is less than the target, it means the target can only be in the right half, so update "left" to mid + 1.
+// If the middle element is greater than the target, it means the target can only be in the left half, so update "right" to mid - 1.
+// Repeat steps 3 and 4 until the left pointer exceeds the right pointer, which means you've searched the entire collection.
+
+// Binary search has a time complexity of O(log n), making it much more efficient than linear search (O(n)) for large datasets. It is widely used in computer science and programming to quickly find elements in sorted collections.

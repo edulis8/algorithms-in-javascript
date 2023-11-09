@@ -28,7 +28,8 @@
  */
 function get_distinct_subsets(s) {
   const result = [];
-  // presort, so we can process all duplicates at the same time. Alternative: hash map with frequencies...
+  // presort, so we can process all duplicates at the same time. 
+  // ** Alternative: hash map with frequencies...
   const arr = s.split('');
   arr.sort();
   helper(arr, 0, []);

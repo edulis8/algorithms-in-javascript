@@ -10,21 +10,22 @@
 
 
 // LINEAR TIME
-// LINEAR SPSACE
+// LINEAR SPACE
 var findBuildings = function(heights) {
   // result is index-based
-  const result = [heights.length - 1];
+  const result = [heights.length - 1]; // put leftmost building in the result array, it can always see ocean
 
-  for (let i = heights.length - 2; i >= 0; i--) {
+  for (let i = heights.length - 2; i >= 0; i--) { // iterate backward from len-2
      
       const currentBuilding = heights[i]; // 
-      const lastBuildingIndex = result[result.length - 1]; 
+      const lastBuildingIndex = result[result.length - 1]; // be careful with values and indexes!
 
       if (currentBuilding > heights[lastBuildingIndex]) {
           result.push(i);
       }
   }
 
+  // remember to reverse!
   return result.reverse();
 };
 

@@ -120,16 +120,16 @@ console.log('\n******************** ************\n')
 // BFS PSUEDO CODE
 
 
-// function bfs(source) {
-//   distance[source] = 0; // keep a distance array
-//   // where parent array is set in loop
-//   parent[neighbor] = node;
-//   distance[neighbor] = 1 + distance[node];
-//   // where returning
-//   if (distance[neighbor] == distance[node]) {
-//     return false; // not bipartite, a connection between this node and its neighbor 
-//   }
+function bfs(source) {
+  distance[source] = 0; // keep a distance array
+  // where parent array is set in loop
+  parent[neighbor] = node;
+  distance[neighbor] = 1 + distance[node];
+  // where returning
+  if (distance[neighbor] == distance[node]) {
+    return false; // not bipartite, a connection between this node and its neighbor 
+  }
 
-//   // at end of bfs
-//   return true
-// }
+  // at end of bfs
+  return true
+}

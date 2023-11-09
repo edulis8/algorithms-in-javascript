@@ -25,7 +25,7 @@ function implementation(arr) {
 
     // WORK DONE AFTER RECURSING
     // sorting into the subarray
-    // two pointer pass sorting
+    // Two pointer pass sorting
     while (i <= mid && j <= end) {
       if (arr[i] <= arr[j]) {
         aux.push(arr[i]);

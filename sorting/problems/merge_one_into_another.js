@@ -57,7 +57,7 @@ function merge_one_into_another(first, second) {
       placementIndex--;
     }
 
-    // gathering what's left phase
+    // gathering what's left phase, if 
     while (i >= 0) {
       second[placementIndex] = first[i];
       i--;
