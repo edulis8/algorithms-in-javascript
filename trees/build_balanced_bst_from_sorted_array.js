@@ -4,7 +4,11 @@
 // Given a sorted list of distinct integers, build a balanced binary search tree (BST).
 
 // A BST is called balanced if the number of nodes in the left and right subtrees of every node differs by at most one.
-// The time complexity of this function is O(n), where 'n' is the number of elements in the sorted array 'a'. The function visits each element in the array exactly once to build the tree.
+
+// TIME COMPLEXITY of this function is O(n), 
+// where 'n' is the number of elements in the sorted array 'a'. 
+// The function visits each element in the array exactly once to build the tree.
+
 function build_balanced_bst(a) {
   // find middle
   // create a node out of the value at the middle

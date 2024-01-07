@@ -16,7 +16,7 @@ const BinaryTreeNode = class {
 };
 
 // TIME COMPLEXITY: LINEAR. total amount of work we do is proportional to the amount of nodes. 0(n)
-// SPACE: O(n) in worst case. Really n/2 because n/2 is amount of trees in the last layer. Same as linear tho.
+// SPACE: O(n) in worst case. Really n/2 because n/2 is probably the amount of nodes in the last layer (max size of queue array). That is the same as linear, though.
 */
 /**
  * @param {BinaryTreeNode_int32} root
@@ -51,4 +51,6 @@ function level_order_traversal(root) {
     // #1
     return result;
 }
+
+
 

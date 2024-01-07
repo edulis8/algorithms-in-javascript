@@ -1,6 +1,7 @@
 // Root To Leaf Path Sum Equal To K
 // Given a binary tree and an integer k, check whether the tree has a root to leaf path with a sum of values equal to k.
 
+// DECISION PROBLEM. DOES ONE PATH EXIST. HAND TARGET - NODE VALUE DOWN UNTIL A LEAF NODE EQUALS TARGET...(ie if we subtracted them we'd hit 0)
 
 // TIME: O(n) - all nodes may need to be hit to get the final answer
 // SPACE O(n) <- max call stack size... all nodes could be in call stack for certain kinds of trees
@@ -20,7 +21,7 @@ function path_sum(root, k) {
 
 
   function dfs(node, target) {
-    if ((!node.left && !node.right) || result) { // short circuit
+    if ((!node.left && !node.right) || result) { // short circuiting!
       // leaf level processing. Base case
       if (target == node.value) {
         result = true;

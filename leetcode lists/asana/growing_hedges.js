@@ -120,7 +120,7 @@ function simulateOneYearGrowth(garden) {
     for (let col = 0; col < width; col++) {
       const populatedNeighbors = countPopulatedNeighbors(garden, row, col);
       if (garden[row][col] == 1 && populatedNeighbors == 8) {
-        // empty out this cell
+        // empty out this cell if surrounded
         newGarden[row][col] = 0;
       } else if (garden[row][col] == 0 && populatedNeighbors > 0) {
         newGarden[row][col] = 1;

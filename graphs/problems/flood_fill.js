@@ -36,39 +36,85 @@ function flood_fill(pixel_row, pixel_column, new_color, image) {
   // getNeighbors function
   // DFS graph solution
   // you know if a node is visited if it has already been changed...
-  
+
   const oldColor = image[pixel_row][pixel_column];
   dfs(pixel_row, pixel_column)
-  
+
   return image;
-  
+
   function dfs(row, col) {
-     
-      image[row][col] = new_color;
-      
-      const neighbors = getNeighbors(row, col, oldColor);
-      for (const [rowNeighbor, colNeighbor] of neighbors) {
-           if (image[rowNeighbor][colNeighbor] == oldColor) {
-                dfs(rowNeighbor, colNeighbor)
-           }
-         
+
+    image[row][col] = new_color;
+
+    const neighbors = getNeighbors(row, col, oldColor);
+    for (const [rowNeighbor, colNeighbor] of neighbors) {
+      if (image[rowNeighbor][colNeighbor] == oldColor) {
+        dfs(rowNeighbor, colNeighbor)
       }
-      
+
+    }
+
   }
-  
+
   function getNeighbors(row, col) {
-      // row -1, col
-      // row + 1, col
-      // row, col + 1
-      // row, col -1
-      const result = [];
-      const rowLength = image.length;
-      const colLength = image[0].length;
-      if (row - 1 >= 0) result.push([row-1,col]);
-      if (row + 1 < rowLength) result.push([row+1,col]);
-      if (col - 1 >= 0) result.push([row,col-1]);
-      if (col + 1 < colLength) result.push([row,col+1]);
-      
-      return result;
+    // row -1, col
+    // row + 1, col
+    // row, col + 1
+    // row, col -1
+    const result = [];
+    const rowLength = image.length;
+    const colLength = image[0].length;
+    if (row - 1 >= 0) result.push([row - 1, col]);
+    if (row + 1 < rowLength) result.push([row + 1, col]);
+    if (col - 1 >= 0) result.push([row, col - 1]);
+    if (col + 1 < colLength) result.push([row, col + 1]);
+
+    return result;
   }
 }
+
+
+
+
+var floodFill = function (image, sr, sc, color) {
+  let pixel_row = sr;
+  let pixel_column = sc;
+  let new_color = color;
+
+
+  const oldColor = image[pixel_row][pixel_column];
+  dfs(pixel_row, pixel_column)
+
+  return image;
+
+  function dfs(row, col) {
+
+    image[row][col] = new_color;
+
+    const neighbors = getNeighbors(row, col, image);
+    for (const [rowNeighbor, colNeighbor] of neighbors) {
+      if (image[rowNeighbor][colNeighbor] == oldColor) {
+        dfs(rowNeighbor, colNeighbor)
+      }
+    }
+  }
+}
+
+
+function getNeighbors(row, col, image) {
+  // row -1, col
+  // row + 1, col
+  // row, col + 1
+  // row, col -1
+  const result = [];
+  const rowLength = image.length;
+  const colLength = image[0].length;
+  if (row - 1 >= 0) result.push([row - 1, col]);
+  if (row + 1 < rowLength) result.push([row + 1, col]);
+  if (col - 1 >= 0) result.push([row, col - 1]);
+  if (col + 1 < colLength) result.push([row, col + 1]);
+
+  return result;
+}
+
+console.log('result', floodFill([[1, 1, 1], [1, 1, 0], [1, 0, 1]], 1, 1, 2))

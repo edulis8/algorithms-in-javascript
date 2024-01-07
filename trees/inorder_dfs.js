@@ -12,6 +12,19 @@
 // Node values are unique
 
  /*
+ 
+// Time Complexity
+// O(node_count).
+
+// All of the nodes in the binary tree are visited exactly once.
+
+// Auxiliary Space Used
+// O(node_count).
+
+// There will be O(node_count) number of recursive calls on the call stack in the worst case.
+
+
+
 For your reference:
 const BinaryTreeNode = class {
     constructor(value) {
@@ -42,12 +55,3 @@ function inorder(root) {
   return !root ? [] : inorder(root.left).concat([root.value]).concat(inorder(root.right))
 }
 
-// Time Complexity
-// O(node_count).
-
-// All of the nodes in the binary tree are visited exactly once.
-
-// Auxiliary Space Used
-// O(node_count).
-
-// There will be O(node_count) number of recursive calls on the call stack in the worst case.

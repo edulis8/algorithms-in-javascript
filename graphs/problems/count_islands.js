@@ -32,7 +32,7 @@ function islands(grid) {
 
   function dfs(x, y) {
     grid[x][y] = "V";
-    for (let [row, col] of __getNeighborsWithDiagonals(grid, x, y)) {
+    for (let [row, col] of getNeighborsWithMap(grid, x, y)) {
       if (grid[row][col] !== 'V' && grid[row][col] == "1") {
         dfs(row, col)
       }
@@ -132,7 +132,7 @@ let grid = [
   [1, 0, 1, 0, 1]
 ]
 
-// Easier to memorize this for me:
+// Easier to mmorize this for me:
 function new_getNeighborsWithDiagonals(grid, row, col) {
   const result = [];
   // all combos of 1,0,-1, but not 0,0
@@ -155,8 +155,8 @@ function new_getNeighborsWithDiagonals(grid, row, col) {
   return result;
 }
 
-console.log('orig', orig__getNeighborsWithDiagonals(grid, 2, 2))
-console.log('new', new_getNeighborsWithDiagonals(grid, 2, 2))
+// console.log('orig', orig__getNeighborsWithDiagonals(grid, 2, 2))
+// console.log('new', new_getNeighborsWithDiagonals(grid, 2, 2))
 
 
 let result = islands(grid);
@@ -207,9 +207,19 @@ function countIslands(matrix) {
   return islands;
 }
 
-let result2 = countIslands(grid);
+let result2 = islands(grid);
 console.log('result:', result2)
 console.log('\n******************** ************\n')
 
 
 
+function getNeighborsWithMap(grid, row, col) {
+  const relativeCoords = [[-1, 0], [0, 1], [1, 0], [0, -1]];
+  return relativeCoords.map(([relativeRow, relativeCol]) => {
+      const r = row + relativeRow;
+      const c = col + relativeCol;
+      if (r < 0 || r >= grid.length) return null;
+      if (c < 0 || c >= grid[0].length) return null;
+      return grid[row + relativeRow][col + relativeCol];
+  }).filter(coord => !!coord);
+};

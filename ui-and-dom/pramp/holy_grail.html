@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--  
+Many web pages require a layout with multiple (often three) columns, with the main page content in one column (often the center), and supplementary content such as menus and advertisements in the other columns (sidebars). These columns commonly require separate backgrounds, with borders between them, and should appear to be the same height no matter which column has the tallest content. A common requirement is that the sidebars have a fixed width, with the center column adjusting in size to fill the window (fluid or liquid layout). Another common requirement is that, when a page does not contain enough content to fill the screen, the footer should drop to the bottom of the browser window instead of leaving blank space underneath.-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Holy Grail</title>
+</head>
+
+<body>
+  <header>
+    <h1>HEADER</h1>
+  </header>
+  <!--  new row  -->
+  <main class="container">
+      <nav class="row-item">
+        <h3>MENU</h3>
+        <ul>
+          <li>ITEM 1</li>
+          <li>ITEM 2</li>
+          <li>ITEM 3</li>
+          <li>ITEM 4</li>
+        </ul>
+      </nav>
+      <section class="row-item content">
+        <h2>CONTENT</h2>
+        <p>Lorem ipsum</p>
+      </section>
+      <aside class="row-item">
+        <ul>
+          <li>AD</li>
+          <li>AD</li>
+        </ul>
+      </aside>
+  </main>
+  <!--   end row   -->
+  <footer><h1>FOOTER</h1></footer>
+</body>
+
+</html>
+
+<style>
+  /*  */
+* {
+  border: 1px solid black;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch; 
+  height: 100%;
+}
+
+.container {
+  flex-grow: 1;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-flow: row nowrap;
+  margin-bottom: auto;
+}
+
+.row-item {
+  padding: 10px;
+  flex-grow: 1;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.content {
+  text-align: center;
+  flex-grow: 6;
+  padding: 10px;
+}
+
+</style>

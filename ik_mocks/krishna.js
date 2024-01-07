@@ -134,7 +134,7 @@ function isAlienSorted(words, order) {
 // }
 
 
-2. Write serialization and de - serialization methods for a binary tree
+// 2. Write serialization and de - serialization methods for a binary tree
 
 // convert to string
 // convert from string back to binary tree

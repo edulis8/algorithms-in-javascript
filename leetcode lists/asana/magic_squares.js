@@ -25,14 +25,15 @@ var numMagicSquaresInside = function (grid) {
   return result;
 };
 
-const lowerLimit = 1;
-const higherLimit = 9;
+const LOWER_LIMIT = 1;
+const HIGHER_LIMIT = 9;
 
 function hasEightDistinctValidNeighbors(row, col, grid) {
   let result = 0;
   // two arrays to represent all neighbor coords 
   const addRow = [-1, -1, -1, 0, 0, 1, 1, 1];
   const addCol = [-1, 0, 1, 1, -1, -1, 0, 1];
+  // distinct values so use a set
   const set = new Set([grid[row][col]]);
 
   for (let i = 0; i < 8; i++) {
@@ -45,7 +46,7 @@ function hasEightDistinctValidNeighbors(row, col, grid) {
       colToCheck < grid[0].length
     ) {
       const el = grid[rowToCheck][colToCheck];
-      if (!set.has(el) && el >= lowerLimit && el <= higherLimit) {
+      if (!set.has(el) && el >= LOWER_LIMIT && el <= HIGHER_LIMIT) {
         result++;
         set.add(el);
       }
