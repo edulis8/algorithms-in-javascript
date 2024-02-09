@@ -1,1 +1,6 @@
 node_modules/
+company-specific
+.vscode/
+playground.js
+pramp/
+ 

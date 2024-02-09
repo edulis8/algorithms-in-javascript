@@ -250,7 +250,7 @@ function generate_all_subsets(s) {
 // Auxiliary Space Used
 // O(n).
 // It is the worst case recursion depth.
-function find_combinations(n, k) {
+function find_combinations(n, k) { // aka find_sets(n, k)
   const result = [];
   helper(1, [])
   return result;

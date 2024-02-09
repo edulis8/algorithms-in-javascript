@@ -35,7 +35,10 @@ Many web pages require a layout with multiple (often three) columns, with the ma
       </aside>
   </main>
   <!--   end row   -->
-  <footer><h1>FOOTER</h1></footer>
+  <footer>
+    <div class="test">hello</div>
+    <h1>FOOTER</h1>
+  </footer>
 </body>
 
 </html>
@@ -46,11 +49,19 @@ Many web pages require a layout with multiple (often three) columns, with the ma
   border: 1px solid black;
 }
 
-.body {
+.test {
+  position: sticky;
+  top: 100px;
+  left: 100px;
+  width: 100%;
+  background-color: red
+}
+
+body {
   display: flex;
   flex-direction: column;
   justify-content: stretch; 
-  height: 100%;
+  height: 100vh;
 }
 
 .container {
@@ -73,9 +84,14 @@ ul {
 }
 
 .content {
+  /* min-width: 500px; */
   text-align: center;
   flex-grow: 6;
   padding: 10px;
+}
+
+footer {
+  position: relative;
 }
 
 </style>

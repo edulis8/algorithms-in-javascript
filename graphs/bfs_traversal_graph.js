@@ -70,14 +70,15 @@ function bfs_traversal(n, edges) {
     }
     return result;
 
-
     function bfs(node) {
         let queue = [];
         queue.push(node);
         visited[node] = true;
         while (queue.length) {
             let current = queue.shift();
+            /// processing step
             result.push(current); // processing step
+            //
             let neighbors = adjList[current];
             for (let neighbor of neighbors) {
                 if (!visited[neighbor]) {

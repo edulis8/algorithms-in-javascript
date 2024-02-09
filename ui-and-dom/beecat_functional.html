@@ -1,0 +1,107 @@
+<!-- BeeCat Semantic HTML -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>BEECAT</title>
+</head>
+
+<body>
+  <!-- data component with initial state -->
+  <button data-component="BeeCat" data-start="0"></button>
+  <button data-component="BeeCat2" data-start="0"></button>
+
+
+  <!-- templates, which are like code snippets -->
+  <template data-template-for="BeeCat" data-template-id="number">
+    <span></span>
+  </template>
+
+  <template data-template-for="BeeCat" data-template-id="bee">
+    <span>🐝</span>
+  </template>
+
+  <template data-template-for="BeeCat" data-template-id="cat">
+    <span>🐱</span>
+  </template>
+
+  <script>
+    // encapsulate in createWhatever
+    const createBeeCat = (node) => {
+      // local encapsulated vars
+      let count = parseInt(node.dataset.start, 10);
+      const templates = {};
+
+      document
+        .querySelectorAll("template[data-template-for='BeeCat']")
+        .forEach((template) => {
+          templates[template.dataset.templateId] = template;
+        });
+
+      const render = () => {
+        removeListeners();
+        node.innerHTML = "";
+        const bee = count > 0 && count % 5 === 0;
+        const cat = count > 0 && count % 7 === 0;
+        const num = templates.number.content.cloneNode(true);
+        num.appendChild(document.createTextNode(count));
+
+        if (bee) node.appendChild(templates.bee.content.cloneNode(true));
+        if (cat) node.appendChild(templates.cat.content.cloneNode(true));
+        if (!bee && !cat) node.appendChild(num);
+        addListeners();
+      };
+
+      const renderWithoutTemplate = () => {
+        removeListeners();
+        node.innerHTML = "";
+        const bee = count > 0 && count % 5 === 0;
+        const cat = count > 0 && count % 7 === 0;
+        let textDisplay = '';
+        textDisplay += bee ? '🐝' : '';
+        textDisplay += cat ? '🐱' : '';
+        textDisplay += (!bee && !cat) ? count : '';
+
+        node.appendChild(document.createTextNode(textDisplay));
+        addListeners();
+      };
+
+      const removeListeners = () => {
+        node.removeEventListener("click", handleClick);
+      };
+
+      const addListeners = () => {
+        node.addEventListener("click", handleClick);
+      };
+
+      const handleClick = () => {
+        count++;
+        render();
+      };
+
+      // Initial render
+      // render();
+
+      // return an object with the public methods:
+      return {
+        render,
+        renderWithoutTemplate,
+        // add other public methods if needed
+      };
+    };
+
+    // select our component in the HTML
+    const component = document.querySelector("[data-component='BeeCat']")
+    const component2 = document.querySelector("[data-component='BeeCat2']")
+
+    // call our create function, injecting in the component/node.
+    // an object with the public methods
+    // it is being called here, the object is not used.
+    // render is done inside itself
+    createBeeCat(component).render();  
+    createBeeCat(component2).renderWithoutTemplate();  
+
+  </script>
+</body>
+
+</html>

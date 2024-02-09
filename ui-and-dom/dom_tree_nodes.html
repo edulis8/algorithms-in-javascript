@@ -1,0 +1,147 @@
+
+
+<!-- 
+
+Given two identical DOM trees with root nodes X and Y, given a node target in X’s tree, find the equivalent node in Y’s tree (the node at the same depth and position in Y’s tree).
+
+Example:
+Node C in X’s tree would correspond with node L in Y’s tree. Given a target C, you need to find node L. 
+
+
+Hint:
+
+Ideally, use DOM APIs to traverse the trees, but if you are not familiar with the DOM, you may assume the nodes have the following type: 
+
+
+
+type Node = {
+  children: Element[];
+  parentElement: Element;
+};
+ -->
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+  <input placeholder="enter the target" />
+  <section>
+
+  </section>
+  <!-- tree 1 -->
+  <div class="x">
+    <div class="a">
+      <div class="c"></div>
+      <div class="d"></div>
+    </div>
+    <div class="b">
+      <div class="e"></div>
+      <div class="f"></div>
+    </div>
+  </div>
+
+  <!-- tree 2 -->
+  <div class="y">
+    <div class="j">
+      <div class="l"></div>
+      <div class="m"></div>
+    </div>
+    <div class="k">
+      <div class="n"></div>
+      <div class="o"></div>
+    </div>
+  </div>
+
+
+  <script>
+    const root1 = document.querySelector('.x');
+    const root2 = document.querySelector('.y');
+
+    function findIdenticalNode(root1, root2, target) {
+      const targetInTree1 = traverse(root1, target)
+      if (!targetInTree1) {
+        return false;
+      }
+      let counter1 = 0;
+      let counter2 = 0;
+      // BFS
+      const q = [root1];
+
+      while (q.length) {
+        const node = q.shift();
+        counter1 += 1;
+        if (node === target) {
+          break;
+        }
+        for (const el of node.children) {
+          q.push(el)
+        }
+      }
+
+      // if (!q.includes(target)) return false;
+
+      const q2 = [root2];
+
+      while (q2.length) {
+        const node = q2.shift();
+        counter2 += 1;
+        if (counter2 === counter1) {
+          return node;
+        }
+        for (const el of node.children) {
+          q2.push(el)
+        }
+      }
+      return false;
+    }
+
+    const target = document.querySelector('.e');
+    console.log(findIdenticalNode(root1, root2, target))
+
+    const input = document.querySelector('input');
+    const section = document.querySelector('section');
+    input.addEventListener('change', (e) => {
+      const userVal = e.target.value;
+      const _target = document.querySelector(`.${userVal}`)
+      const result = findIdenticalNode(root1, root2, _target); // return div.class=l
+      section.innerHTML = '';
+      resultP = document.createElement('p');
+      resultP.style.backgroundColor = 'rgba(0 ,0, 0, 0.5)';
+      resultP.style.borderRadius = '100%';
+      resultP.style.minWidth = '2vw'
+      resultP.style.width = '5vw'
+
+      resultP.style.maxWidth = '7vw'
+
+      resultP.style.textAlign = 'center'
+      resultP.textContent = result ? result.classList[0] : 'false'
+      section.append(resultP)
+    })
+
+    function traverse(el, target) {
+      console.log('trav')
+      let found = false;
+
+      if (el === target) return true;
+      helper(el, target)
+
+      return found;
+
+      function helper(el, target) {
+        for (let child of el.children) {
+          if (child === target) {
+            found = true;
+          }
+          helper(child, target);
+        }
+      }
+    }
+  </script>
+
+</body>
+
+</html>

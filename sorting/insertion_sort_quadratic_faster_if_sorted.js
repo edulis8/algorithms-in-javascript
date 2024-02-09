@@ -9,21 +9,25 @@
 
 // In insertion sort elements are bubbled into the sorted section. (while in bubble sort the maximums are bubbled out of the unsorted section.)
 
+// window 3
+
+// [1, 2, 4, 5, 3, 7, 8, 6, 10, 9]
+//          ^     ^
+
+// [1, 4, 5, 2, 3, 7, 8, 6, 10, 9], k = 2
+// ^           ^
+
+
 function implementation(arr) {
   if (arr.length < 2) return;
-
   for (let i = 0; i < arr.length; i++) {
-    console.log(i, '-------------');
-
-    let j = i - 1;
+    let j = i - 1; // leftNeighbor
     let currElement = arr[i]; // Find the right spot for it. Next to a lesser neighbor.
-    console.log('current element: ', currElement)
-    while (j >= 0 && currElement < arr[j]) { // while curr element is greater then left neighbor
+    while (j >= 0 && currElement < arr[j]) { // while curr element is less than then leftNeighbor
       arr[j + 1] = arr[j] // move neighbor to the right
-      j--; // decrement j so that:
-      arr[j + 1] = currElement  // we can place current element where left neighbor was
-      console.log(arr.toString());
+      j--; // decrement j so that it goes to the left so that:
     }
+    arr[j + 1] = currElement  // we can place current element where left neighbor was
   }
 
   return arr;
@@ -38,12 +42,12 @@ console.log('result:', result)
 
 console.error('\n******************** ************\n')
 
-1,4,5,1001,1001,9,4,50,7,100,2
-1,4,5,5,1001,9,4,50,7,100,2
-1,4,4,5,1001,9,4,50,7,100,2
-1,1,4,5,1001,9,4,50,7,100,2
+// 1,4,5,1001,1001,9,4,50,7,100,2
+// 1,4,5,5,1001,9,4,50,7,100,2
+// 1,4,4,5,1001,9,4,50,7,100,2
+// 1,1,4,5,1001,9,4,50,7,100,2
 
-1,4,5,0,1001,9,4,50,7,100,2
-1,4,0,5,1001,9,4,50,7,100,2
-1,0,4,5,1001,9,4,50,7,100,2
-0,1,4,5,1001,9,4,50,7,100,2
+// 1,4,5,0,1001,9,4,50,7,100,2
+// 1,4,0,5,1001,9,4,50,7,100,2
+// 1,0,4,5,1001,9,4,50,7,100,2
+// 0,1,4,5,1001,9,4,50,7,100,2

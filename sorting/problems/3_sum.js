@@ -30,6 +30,10 @@ function implementation(arr) {
   // create with arr[i] and those two elements as a string, push to result array.
   // FYI this is quadratic and probably not the best answer.
 
+  //
+  calc saure root
+  //
+
   const lookup = {};
   const magicTriplets = new Set();
   // make a element -> index lookup

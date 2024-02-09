@@ -2,6 +2,9 @@
 // Count All Subsets Of A Set Of Size N
 // Given a number denoting the size of a set, count the number of unique subsets of that set.
 
+
+ Math.pow(2,n)
+
 // Example
 // {
 // "n": 3

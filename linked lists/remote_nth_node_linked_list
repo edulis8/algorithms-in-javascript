@@ -1,0 +1,31 @@
+
+
+function remove(head, n) {
+  const nodes = []
+  // const length = getLength(head)
+  let node = head;
+
+
+  while(node != null) {
+    nodes.push(node)
+    node = node.next;
+  }
+
+
+
+  const index = array.length - n;
+
+  if (nodes[index] === head) {
+    return head.next
+  }
+
+
+  const beforeNode = nodes[index - 1];
+  const afterNode = nodes[index + 1];
+
+  beforeNode.next = afterNode;
+
+
+  return head;
+
+}

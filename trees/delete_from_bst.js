@@ -43,7 +43,7 @@ function delete_from_bst(root, values_to_be_deleted) {
     }
     // Node to be deleted is present in the tree
     if (current !== null) {
-      // Leaf node
+      // Leaf node, node with no children
       if (current.left === null && current.right === null) {
         // single root node
         if (previous === null) {
