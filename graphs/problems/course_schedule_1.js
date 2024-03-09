@@ -1,4 +1,3 @@
-
 /**
  
 207. Course Schedule
@@ -42,12 +41,12 @@ SPACE:
  * @param {number[][]} prerequisites
  * @return {boolean}
  */
-var canFinish = function(n, prerequisites) {
+var canFinish = function (n, prerequisites) {
   let timestamp = 0;
   const visited = [];
   const arrivals = [];
   const departures = [];
-  const adjList = buildAdjList(n, prerequisites)
+  const adjList = buildAdjList(n, prerequisites);
 
   for (let v = 0; v < n; v++) {
     if (!visited[v]) {
@@ -64,14 +63,15 @@ var canFinish = function(n, prerequisites) {
       if (!visited[neighbor]) {
         if (dfs(neighbor)) return true; // violation found
       } else {
+        // we've seen this neighbor before
         if (!departures[neighbor]) {
-          // if departures not set here, means departure will be greater - timestamp is a record of entering/leaving the call stack
-          // if departure time is greater, it indicates a back edge, or a cycle
+          // if neighbor departures not set here, means its departure will be greater - timestamp is a record of entering/leaving the call stack
+          // if its departure time is greater, it indicates a back edge, or a cycle
           return true; // violation found
         }
       }
     }
-    departures[node] = timestamp++
+    departures[node] = timestamp++;
     return false; // no violation found
   }
 
@@ -79,8 +79,72 @@ var canFinish = function(n, prerequisites) {
     const adjList = new Array(n).fill(0).map(() => []); // array of arrays
     prerequisites.forEach(([course, prereq]) => {
       adjList[prereq].push(course);
-    })
+    });
     return adjList;
   }
-}
+};
 
+/*
+WITH ADJLIST AS AN OBJECT AND VISITED AS A SET
+
+
+SAME AS ASKING: IS THERE A CYCLE IN A DIRECTED GRAPH.
+NEED OUTER LOOP IN CASE NOT CONNECTED.
+
+TIME:
+O(number_of_nodes + number_of_edges).
+SPACE:
+O(number_of_nodes + number_of_edges).
+
+
+ * @param {number} numCourses
+ * @param {number[][]} prerequisites
+ * @return {boolean}
+ */
+var canFinish = function (n, prerequisites) {
+  let timestamp = 0;
+  const visited = new Set();
+  const arrivals = [];
+  const departures = [];
+  const adjList = buildAdjList(prerequisites);
+
+  // Need outer loop in case not connected
+  for (let v = 0; v < n; v++) {
+    if (!visited.has(v)) {
+      if (dfs(v)) return false; // violation found
+    }
+  }
+
+  return true; // no violated found
+
+  function dfs(node) {
+    visited.add(node);
+    arrivals[node] = timestamp++;
+    if (adjList[node]) {
+      for (const neighbor of adjList[node]) {
+        if (!visited.has(neighbor)) {
+          if (dfs(neighbor)) return true; // violation found
+        } else {
+          if (!departures[neighbor]) {
+            // if departures not set here, means departure will be greater - timestamp is a record of entering/leaving the call stack
+            // if departure time is greater, it indicates a back edge, or a cycle
+            return true; // violation found
+          }
+        }
+      }
+    }
+    departures[node] = timestamp++;
+    return false; // no violation found
+  }
+
+  function buildAdjList(prerequisites) {
+    // directed graph
+    // prereq -> course
+    const adjList = {};
+    prerequisites.forEach(([course, prereq]) => {
+      adjList[prereq] = adjList[prereq] || [];
+      adjList[prereq].push(course);
+    });
+    return adjList;
+  }
+};

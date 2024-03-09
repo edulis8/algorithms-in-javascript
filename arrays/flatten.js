@@ -34,7 +34,7 @@ var flat = function (arr, n) {
       if (!Array.isArray(array[i]) || depth >= n) {
         result.push(array[i]);
       } else {
-        // arr[i] is the array, reset index to 0 so we can iterate thru it, increment depth
+        // arr[i] is the array, reset index to 0 (in loop at next level of recursion) so we can iterate thru it, increment depth
         helper(array[i], depth + 1);
       }
     }

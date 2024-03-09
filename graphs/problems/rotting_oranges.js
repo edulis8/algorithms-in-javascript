@@ -64,11 +64,11 @@ function rotting_oranges(grid) {
 
   const queue = [];
 
+  // put all rotten oranges (2s) in the queue first
   for (let row = 0; row < grid.length; row++) {
     for (let col = 0; col < grid[0].length; col++) {
       if (grid[row][col] === 2) {
-        // put all 2s in the queue first
-        queue.unshift([row, col]);
+        queue.unshift([row, col]); // 
       }
     }
   }
@@ -76,6 +76,7 @@ function rotting_oranges(grid) {
 
   bfs();
 
+  // find any fresh oranges
   for (let row = 0; row < grid.length; row++) {
     for (let col = 0; col < grid[0].length; col++) {
       if (grid[row][col] === 1) {
@@ -91,8 +92,8 @@ function rotting_oranges(grid) {
   function bfs() {
     while (queue.length) {
       let l = queue.length;
-      while (l--) { // a layer
-        // all 2s processed
+      while (l--) { // a layer/minute - when this is done we know we've finished a layer/minute
+        // all rotten 2s processed
         let [row_, col_] = queue.shift();
         let neighbors = getNeighbors(grid, row_, col_)
 

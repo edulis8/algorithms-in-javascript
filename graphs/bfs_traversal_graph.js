@@ -58,7 +58,7 @@ function bfs_traversal(n, edges) {
 
     for (let [start, end] of edges) {
         adjList[start].push(end);
-        adjList[end].push(start);
+        adjList[end].push(start);  
     }
 
     let visited = new Array(n).fill(false);
@@ -75,11 +75,11 @@ function bfs_traversal(n, edges) {
         queue.push(node);
         visited[node] = true;
         while (queue.length) {
-            let current = queue.shift();
+            let current = queue.shift(); // remove from front of queue
             /// processing step
             result.push(current); // processing step
             //
-            let neighbors = adjList[current];
+            let neighbors = adjList[current]; // access neighbors by looking up in adjList on current
             for (let neighbor of neighbors) {
                 if (!visited[neighbor]) {
                     queue.push(neighbor);

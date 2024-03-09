@@ -7,10 +7,6 @@ const BinaryTreeNode = class {
         this.right = null;
     }
 };
-
-
-
-
 */
 /**
  * @param {BinaryTreeNode_int32} root

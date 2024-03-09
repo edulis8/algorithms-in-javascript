@@ -39,7 +39,7 @@ function find_height(root) {
   helper(root, 0);
   return globalMax;
 
-  function helper(node, counter) {
+  function helper(node, counter) {π
     // base case, leaf worker
     // check if no children
     // 
