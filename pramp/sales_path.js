@@ -3,6 +3,7 @@
 // DFS
 // LINEAR TIME
 // NO EXTRA SPACE
+// CALL STACK SPACE O(n)
 
 
 function getCheapestCost(rootNode) {

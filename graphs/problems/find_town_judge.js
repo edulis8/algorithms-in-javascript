@@ -38,7 +38,8 @@ Output:
 -1
 Notes
 There are n persons in the town, and each person is represented by a unique number from 1 to n.
-Trust among the people is represented in a two-dimensional list where each inner list consists of two values [u, v]. This represents that the person numbered u trusts the person numbered v.
+Trust among the people is represented in a two-dimensional list where each inner list consists of two values [u, v]. 
+This represents that the person numbered u trusts the person numbered v.
 If the town judge doesn't exist, return -1.
 Constraints:
 

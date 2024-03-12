@@ -88,7 +88,7 @@ function generate_all_subsets(s) {
 
 console.log('\n******************** OUTPUT ************\n');
 let input = {
-  "s": "dc"
+  "s": "abcd"
 }
 let result = generate_all_subsets(input.s);
 console.log('result:', result)
