@@ -21,7 +21,7 @@ function islands(grid) {
   // this makes sure you hit all unconnected pieces of the graph
   for (let row = 0; row < grid.length; row++) {
     for (let col = 0; col < grid[0].length; col++) {
-      if (grid[row][col] !== 'V' && grid[row][col] == "1") {
+      if (grid[row][col] !== 'V' && grid[row][col] == "1") { // if a non-visited "1"
         islands++;
         dfs(row, col);
       }
@@ -47,6 +47,8 @@ function islands(grid) {
     if (col - 1 >= 0) result.push([row, col - 1]);
     return result;
   }
+
+  
 
 
   function __getNeighborsWithDiagonals(grid, row, col) {

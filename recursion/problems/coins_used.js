@@ -4,7 +4,8 @@
  * @param {number} amount
  * @return {number}
  * 
- * Good attempt here.
+ *  TIME COMPLEXITY: O(amount * coins.length);
+ * Solid attempt here.
  * Many more versions below
  */
 var coinChange = function (coins, amount) {

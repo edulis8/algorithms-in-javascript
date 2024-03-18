@@ -120,16 +120,14 @@ var canFinish = function (n, prerequisites) {
   function dfs(node) {
     visited.add(node);
     arrivals[node] = timestamp++;
-    if (adjList[node]) {
-      for (const neighbor of adjList[node]) {
-        if (!visited.has(neighbor)) {
-          if (dfs(neighbor)) return true; // violation found
-        } else {
-          if (!departures[neighbor]) {
-            // if departures not set here, means departure will be greater - timestamp is a record of entering/leaving the call stack
-            // if departure time is greater, it indicates a back edge, or a cycle
-            return true; // violation found
-          }
+    for (const neighbor of adjList[node] || []) {
+      if (!visited.has(neighbor)) {
+        if (dfs(neighbor)) return true; // violation found
+      } else {
+        if (!departures[neighbor]) {
+          // if departures not set here, means departure will be greater - timestamp is a record of entering/leaving the call stack
+          // if departure time is greater, it indicates a back edge, or a cycle
+          return true; // violation found
         }
       }
     }

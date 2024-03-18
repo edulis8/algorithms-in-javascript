@@ -68,30 +68,47 @@ function is_bst(root) {
   }
 }
 
-// let prev = Number.MIN_SAFE_INTEGER
+// FOR LEETCODE 98:
 
-// function is_bst(root) {
-//     if(root === null) {
-//         return true
-//     }
-//     return dfs(root)
-// }
 
-// function dfs(node) {
-//     if(node === null) {
-//         return true
-//     }
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isValidBST = function(root) {
+  // TO NOTE: node values can be negative.
+  
+  // can't just check direct children of a BST to see if they meet the BST property -- further down children could have a value greater than the root node e.g.
+  // REMEMBER: an INORDER traversal of a BST produces a SORTED ARRAY
+  // KEY POINT: in a sorted array every value is greater than prev value
 
-//     let leftValid = dfs(node.left)
-    
-//     if(node.value < prev) {
-//         return false
-//     }
-    
-//     prev = node.value
-    
-//     let rightValid = dfs(node.right)
-    
-//     return leftValid && rightValid
-    
-// }
+  // let's do an in-order traversal
+  let prev = -Infinity; // smallest number possible
+  let globalResult = true;
+  dfs(root);
+  return globalResult;
+
+  function dfs(node) {
+      if (globalResult === false) return; // short-circuit
+      if (!node) return; // base case
+
+       dfs(node.left);
+      // INORDER process - push to array if creating a sorted array here.
+      // however, for this solution we don't need the whole array... IF any prev is greater than curr, we have a problem!
+      console.log({prev})
+      if (node.val <= prev) { // **no same values allowed! check the description! important!**
+          globalResult = false; 
+      }
+      prev = node.val;
+      dfs(node.right);
+  }
+};
+

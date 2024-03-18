@@ -51,7 +51,7 @@ function get_permutations(arr) {
 
   return result;
 }
-
+~
 console.log('\n******************** OUTPUT ************\n');
 let input = {
   "arr": [1, 1, 2]
