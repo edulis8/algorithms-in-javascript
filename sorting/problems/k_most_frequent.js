@@ -52,7 +52,7 @@ function k_most_frequent(k, words) {
   console.log(arrOfTuples)
 
   arrOfTuples.sort((a, b) => {
-    return b[1] - a[1] || a[0].localeCompare(b[0]);
+    return b[1] - a[1] || a[0].localeCompare(b[0]); // sort by frequency first and by alphabetical order second
   }); // O(nlogn) ... you have to sort it all
   // my solution might be faster than below, because i only sort once
 

@@ -112,3 +112,40 @@ var isValidBST = function(root) {
   }
 };
 
+
+// BOTTOM UP SOLUTION
+var isValidBST = function (root) {
+  // inorder
+  // we do not need to store in array
+  // just check if any value is out of order
+  // i.e. value > nextValue
+  //let isValid = true;
+  let lastVal = null;
+  return helper(root);
+  //return isValid;
+
+  function helper(node) {
+      // if (isValid === false) {
+      //     return;
+      // }
+      // if (!node) {
+      //     return;
+      // }
+      let leftValid = true;
+      let rightValid = true;
+      if (node.left) {
+          leftValid = helper(node.left);
+      }
+      // create sorted array
+      // if at any point we were about to push in a value lesser than last value
+      if (lastVal !== null && lastVal >= node.val) {
+          return false;
+      }
+
+      lastVal = node.val;
+      if (node.right) {
+          rightValid = helper(node.right);
+      }
+      
+      return rightValid && leftValid; // remain true if tree is valid BST
+  }

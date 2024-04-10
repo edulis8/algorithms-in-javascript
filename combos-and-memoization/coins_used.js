@@ -5,6 +5,11 @@
  * @return {number}
  * 
  *  TIME COMPLEXITY: O(amount * coins.length);
+ * 
+ * 
+ * TIME COMPLEXITY IS RELATED TO THE AMOUNT OF ITEMS IN THE CACHE
+ * 
+ * 
  * Solid attempt here.
  * Many more versions below
  */

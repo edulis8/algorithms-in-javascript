@@ -27,7 +27,7 @@ while (i < arrayA[i].length) {
   i++;
 }
 while (j < arrayB[i].length) {
-  rest.push(arr[j]);
+  res.push(arr[j]);
   j++
 }
 

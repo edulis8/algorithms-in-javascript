@@ -1,0 +1,10 @@
+In the context of a connected, undirected graph:
+
+
+SELF LOOPS
+"No self loops" means that there are no edges that start and end on the same vertex. In other words, a vertex cannot have an edge that connects it to itself.
+
+REPEATED EDGES
+"No repeated edges" means that there are no multiple edges between the same pair of vertices. In other words, if there is an edge connecting vertex A to vertex B, there cannot be another edge that also connects vertex A to vertex B.
+
+A connected, undirected graph with no self loops and no repeated edges is often referred to as a simple graph.

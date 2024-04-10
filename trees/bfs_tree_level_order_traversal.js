@@ -52,5 +52,3 @@ function level_order_traversal(root) {
     return result;
 }
 
-
-

@@ -23,7 +23,9 @@ function path_sum(root, k) {
   function dfs(node, target) {
     if ((!node.left && !node.right) || result) { // short circuiting!
       // leaf level processing. Base case
-      if (target == node.value) {
+      // If the remaining target value equals this leaf node's value, then the sum of the path from the root to this node equals the original target sum k.
+      // IF TARGET === this leaf nodes value, then target - node.value == 0.
+      if (target - node.value === 0) {
         result = true;
       }
       return;
@@ -31,8 +33,8 @@ function path_sum(root, k) {
     if (node.left) {
       dfs(node.left, target - node.value);
     }
-    if (node.right, target - node.value) {
-      dfs(node.right);
+    if (node.right) {
+      dfs(node.right, target - node.value);
     }
   }
 }
