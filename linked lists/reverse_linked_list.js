@@ -6,6 +6,11 @@ class ListNode {
     this.next = null;
   }
 }
+// 
+//  [1] <- [2] <- [3]  ..null
+//                c
+//                       n
+//        p 
 
 function reverseLinkedList(head) {
   let prev = null;

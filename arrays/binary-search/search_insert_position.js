@@ -16,15 +16,41 @@ You must write an algorithm with O(log n) runtime complexity.
  * @param {number[]} nums
  * @param {number} target
  * @return {number}
-
-Maniel approach (from algo discord)
-the "alternative approach" to binary search according to Wikipedia
- Instead of looking for a target, lets look for a boundary
-
- step 1) split world into two pieces, things too big and too small
- step 2) pick which side to use for things that are "just right"
- step 3) pick an initial lo and hi that match the inequality
+ * 
+ * 
+ * 
+ * 
  */
+
+
+function searchInsert(nums, target) {
+    return helper(nums, target, 0, nums.length - 1);
+  }
+  
+  function helper(nums, target, start, end) {
+    if (start > end) {
+      return start; // Insert position is `start`
+    }
+  
+    const mid = Math.floor((start + end) / 2);
+  
+    if (nums[mid] === target) {
+      return mid; // Element found at index `mid`
+    } else if (nums[mid] < target) {
+      return helper(nums, target, mid + 1, end); // Search the right half. IMPORTANT add 1 to mid.
+    } else {
+      return helper(nums, target, start, mid - 1); // Search the left half. IMPORTANT subtract 1 from mid.
+    }
+  }
+
+// Maniel approach (from algo discord)
+// the "alternative approach" to binary search according to Wikipedia
+//  Instead of looking for a target, lets look for a boundary
+
+//  step 1) split world into two pieces, things too big and too small
+//  step 2) pick which side to use for things that are "just right"
+//  step 3) pick an initial lo and hi that match the inequality
+ 
  var searchInsert = function(nums, target) {
   // nums[lo] < target <= nums[hi] // RULE OF THE UNIVERSE, how we'll divide the world
 
@@ -62,3 +88,4 @@ function binarySearch(array, target) {
 
     return hi;
 }
+

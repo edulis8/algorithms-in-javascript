@@ -13,7 +13,7 @@ function build_balanced_bst(a) {
   // find middle
   // create a node out of the value at the middle
   // divide array to create the subproblem for the subordinate
-  // hand left side to a subordinate
+  // hand left side to a subordinaten
   // hand right side to sub
   return helper(a, 0, a.length - 1);
 

@@ -2,7 +2,7 @@
  * @param {number} x
  * @return {number}
  */
-var mySqrt = function(num) {
+var mySqrt = function (num) {
   return helper(0, num);
   // [1,2,3,4,5,6,7,8]
   function helper(start, end) {
@@ -16,9 +16,9 @@ var mySqrt = function(num) {
     if (square < num) {
       // go higher, to right
       // if nextSquare is greater than num, return mid
-      const nextSquare = (mid+1) * (mid+1)
+      const nextSquare = (mid + 1) * (mid + 1);
       if (nextSquare > num) {
-          return mid;
+        return mid;
       }
       return helper(mid + 1, end);
     }

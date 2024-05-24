@@ -109,7 +109,6 @@ function find_order(words) {
         let char2 = word2[j];
         adjList[char1] = adjList[char1] || { source: char1, neighbors: new Set() };
         if (char1 != char2) {
-
           adjList[char1].neighbors.add(char2);
           break;
         }
