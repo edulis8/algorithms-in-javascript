@@ -8,9 +8,9 @@ class ListNode {
 }
 // 
 //  [1] <- [2] <- [3]  ..null
-//                c
+//                curr
 //                       n
-//        p 
+//        prev
 
 function reverseLinkedList(head) {
   let prev = null;
@@ -20,15 +20,12 @@ function reverseLinkedList(head) {
   while (current !== null) {
     // Store the next node.
     next = current.next;
-
     // Reverse the current node's next pointer.
     current.next = prev;
-
     // Move pointers forward.
     prev = current;
     current = next;
   }
-
   // After the loop, 'prev' will be the new head.
   return prev;
 }
@@ -62,3 +59,37 @@ const reversedHead = reverseLinkedList(node1);
 
 console.log("Reversed Linked List:");
 printLinkedList(reversedHead);
+
+
+function reverseLinkedList(head) {
+  let prev = null;
+  let current = head;
+  let next = null;
+
+  while (current !== null) {
+    // Store the next node.
+    next = current.next;
+    // Reverse the current node's next pointer.
+    current.next = prev;
+    // Move pointers forward.
+    prev = current;
+    current = next;
+  }
+  // After the loop, 'prev' will be the new head.
+  return prev;
+}
+
+// null <- [1] -> [2] -> [3] -> null
+function reversedLinkedList2(head) {
+  let prev = null;
+  let current = head;
+  let next = null;
+
+  while (current !== null) {
+    next = current.next;
+    current.next = prev;
+    current = next;
+    prev = current;
+  }
+  return prev;
+}

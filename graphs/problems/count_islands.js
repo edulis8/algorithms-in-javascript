@@ -32,7 +32,7 @@ function islands(grid) {
 
   function dfs(x, y) {
     grid[x][y] = "V";
-    for (let [row, col] of getNeighborsWithMap(grid, x, y)) {
+    for (let [row, col] of getNeighbors(grid, x, y)) {
       if (grid[row][col] !== 'V' && grid[row][col] == "1") {
         dfs(row, col)
       }

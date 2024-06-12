@@ -1,3 +1,6 @@
+// Given a binary tree, determine if it is height-balanced
+.
+
 // Approach 1: Top-down recursion
 // Algorithm
 

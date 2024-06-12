@@ -1,1 +1,1 @@
-// .load paht-tofile opens node repl with that file loaded
+// .load path-tofile opens node repl with that file loaded
