@@ -1,20 +1,19 @@
 /**
  * 
- * 
- * 
- * 
- * 
- * 
 IMPORTANT NOTE:
-What if capacity = 1 and we call put again with a new key? You can imagine the headache that might ensue - we need to delete the only existing node, which means we are deleting both the head and tail. Then we need to add the new node, but since the linked list is empty again, we will be setting the new node as the head and tail again.
+What if capacity = 1 and we call put again with a new key? You can imagine the headache that might ensue - 
+we need to delete the only existing node, which means we are deleting both the head and tail. 
+Then we need to add the new node, but since the linked list is empty again, we will be setting the new node as the head and tail again.
 
 The cleanest way to handle the empty list case is by using sentinel nodes.
 
-We will have our head and tail attributes both set to dummy nodes. The "real" head will be head.next and the "real" tail will be tail.prev. These dummy nodes sit just "outside" of our linked list. What is the purpose? We never want head or tail to be null.
+We will have our head and tail attributes both set to dummy nodes. 
+The "real" head will be head.next and the "real" tail will be tail.prev. 
+These dummy nodes sit just "outside" of our linked list. What is the purpose? 
+We never want head or tail to be null.
 
  */
-
-
+// if we can't use JS MAP, use DOUBLY LINKED LIST
 class ListNode {
   constructor(key, val) {
       this.val = val;
@@ -45,7 +44,6 @@ LRUCache.prototype._moveBack = function (key, value) {
   // remove node by stitching together its prev and its next
   node.prev.next = node.next;
   node.next.prev = node.prev;
-
   // add
   const previousEnd = this.end.prev; // end is a dummy, so real end is this.end.prev
   previousEnd.next = node; // node is now at end
@@ -53,19 +51,6 @@ LRUCache.prototype._moveBack = function (key, value) {
   node.next = this.end; // our dummy value takes the final ending spot
   this.end.prev = node; // stick dummy end to node
 
-  // const node = this.map.get(key);
-  // node.val = value ? value : node.val;
-  // // put at back, if we're putting the head at back, set head to be head's child
-  // if (this.head === node && node.next) {
-  //     this.head = this.head.next; // if this is end, next is null
-  //     this.head.prev = null;
-  //     this.head.next = this.head.next || node; // if only 2 values
-  // }
-
-  // const oldEnd = this.end;
-  // this.end = node;
-  // node.prev = oldEnd;
-  // node.next = null;
   return node;
 }
 /** 
@@ -74,11 +59,9 @@ LRUCache.prototype._moveBack = function (key, value) {
 */
 LRUCache.prototype.get = function (key) {
   // Return the value of the key if the key exists, otherwise return -1.
-
   // put node at end
   // if it is the head (has no prev), update head var to be node.next
   // return node's value
-
   if (this.map.has(key)) {
       return this._moveBack(key).val;
   }
@@ -86,33 +69,20 @@ LRUCache.prototype.get = function (key) {
   return -1;
 };
 
-/** 
-* @param {number} key 
-* @param {number} value
-* @return {void}
-*/
 LRUCache.prototype.put = function (key, value) {
   // Update the value of the key if the key exists. Otherwise, add the key-value pair to the cache. 
-  // If the number of keys exceeds the capacity from this operation, evict the least recently used key.
-
+  // If the number of keys exceeds the capacity from this operation, EVICT the least recently used key.
   // if does not exist, create node, initialize everything (head, end, size)
-
   // if exists, access via this.map and update value
-  // if does not exist, insert at end
   // now check if over capacity, if so, remove head
   // set head to be head.next
   let node;
   if (this.map.has(key)) {
       node = this._moveBack(key) // removes old version, adds new to end
   } else if (!this.map.has(key)) {
-      // insert at end
+      // if does not exist, insert at end
       node = new TreeNode(key, value);
-      // if (this.map.size === 0) {
-      //     this.head = node;
-      //     this.end = node;
-      // }
       this.map.set(key, node);
-
       // add
       const previousEnd = this.end.prev;
       previousEnd.next = node;
@@ -121,16 +91,12 @@ LRUCache.prototype.put = function (key, value) {
       this.end.prev = node;
   }
 
+  // EVICT the least recently used key
   if (this.map.size > this.capacity) {
-
       const nodeToDelete = this.head.next; // head.next because head is dummy head
-
       node.prev.next = node.next;
       node.next.prev = node.prev;
-
       this.map.delete(nodeToDelete.key);
-
-
   }
 };
 
@@ -142,7 +108,7 @@ LRUCache.prototype.put = function (key, value) {
 */
 
 // JAVASCRIPT SOLUTION
-// USE MAP
+// USE MAP, it keeps order of insertion in javascript
 
 class LRUCache {
   constructor(capacity) {
